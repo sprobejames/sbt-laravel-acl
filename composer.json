@@ -1,0 +1,13 @@
+{
+    "name": "sprobe/acl",
+    "description": "Simple ACL package for Laravel",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Sprobe Inc.",
+            "email": "developer@sprobe.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
