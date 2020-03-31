@@ -4,7 +4,7 @@ Simple Laravel ACL implementation using groups and permissions.
 
 ## Installation
 Update your project's `composer.json` file:
-```properties
+```
 {
     "require": {
         ...
@@ -21,12 +21,12 @@ Update your project's `composer.json` file:
 ```
   
 In your terminal run the following command:
-```properties
+```
 composer install
 ```
   
 After running composer install, add the following line to your `config/app.php` file  
-```php
+```
 // load the acl service provider
 'providers' => [
     ...
@@ -37,7 +37,7 @@ After running composer install, add the following line to your `config/app.php` 
 
 ## How to Use
 You can activate the ACL by declaring it on your controller:  
-```php
+```
 public function __construct()
 {
     parent::__construct();
@@ -47,6 +47,6 @@ public function __construct()
 }
 ```
 or directly on your routes:  
-```php
+```
 Route::get('users', 'UserController@index')->middleware('acl');
 ```
