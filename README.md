@@ -9,7 +9,7 @@ Update your project's `composer.json` file:
     "require": {
         ...
         ...
-        "sprobe/acl": "master"
+        "sprobe/acl": "dev-master"
     },
     "repositories": [
         {
@@ -22,15 +22,16 @@ Update your project's `composer.json` file:
   
 In your terminal run the following command:
 ```
-composer install
+composer require sprobe/acl
 ```
   
 After running composer install, add the following line to your `config/app.php` file  
 ```
-// load the acl service provider
 'providers' => [
     ...
     ...
+
+    // load the acl service provider
     Sprobe\Acl\SprobeAclServiceProvider::class,
 ]
 ```

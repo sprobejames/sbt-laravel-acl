@@ -3,7 +3,6 @@
 namespace Sprobe\Acl\Traits;
 
 use Illuminate\Support\Facades\Cache;
-
 use Sprobe\Acl\Models\Group;
 
 trait Permissible

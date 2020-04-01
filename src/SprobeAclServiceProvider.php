@@ -13,7 +13,10 @@ class SprobeAclServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->commands([
+            Commands\CreateGroup::class,
+            Commands\CreateResource::class,
+        ]);
     }
 
     /**
