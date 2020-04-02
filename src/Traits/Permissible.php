@@ -45,4 +45,40 @@ trait Permissible
     {
         return $this->belongsToMany(Group::class);
     }
+
+    /**
+     * Assigns User to a Group
+     *
+     * @param string $group
+     * @return mixed
+     */
+    public function assignToGroup(string $group)
+    {
+        $group = Group::findByName($group);
+
+        $this->groups()->syncWithoutDetaching([$group->id]);
+
+        // reload the user groups
+        $this->load('groups');
+
+        return $this;
+    }
+
+    /**
+     * Removes User from a Group
+     *
+     * @param string $group
+     * @return mixed
+     */
+    public function removeFromGroup(string $group)
+    {
+        $group = Group::findByName($group);
+
+        $this->groups()->detach($group->id);
+
+        // reload the user groups
+        $this->load('groups');
+
+        return $this;
+    }
 }

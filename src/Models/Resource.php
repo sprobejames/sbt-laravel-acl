@@ -3,6 +3,7 @@
 namespace Sprobe\Acl\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Sprobe\Acl\Exceptions\ResourceDoesNotExistException;
 
 class Resource extends Model
 {
@@ -18,7 +19,7 @@ class Resource extends Model
      *
      * @return Sprobe\Acl\Models\Resource
      */
-    public function findOrCreate(string $name): Resource
+    public static function findOrCreate(string $name): Resource
     {
         $resource = static::query()->where('slug', $name)->first();
 
@@ -27,6 +28,23 @@ class Resource extends Model
                             'name' => ucfirst($name),
                             'slug' => $name,
                         ]);
+        }
+
+        return $resource;
+    }
+
+    /**
+     * Retrieves the Resource by slug
+     *
+     * @param string $slug
+     * @return Sprobe\Acl\Models\Resource
+     */
+    public static function findBySlug(string $slug): Resource
+    {
+        $resource = static::query()->where('slug', $slug)->first();
+
+        if (! $resource instanceof Resource) {
+            throw new ResourceDoesNotExistException;
         }
 
         return $resource;

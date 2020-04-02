@@ -16,6 +16,7 @@ class SprobeAclServiceProvider extends ServiceProvider
         $this->commands([
             Commands\CreateGroup::class,
             Commands\CreateResource::class,
+            Commands\CreatePermission::class,
         ]);
     }
 

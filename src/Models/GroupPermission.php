@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class GroupPermission extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['group_id', 'permission_id', 'resource_id'];
+
+    /**
      * Retrieves the Permission of the Group
      *
      * @return Sprobe\Acl\Models\Permission

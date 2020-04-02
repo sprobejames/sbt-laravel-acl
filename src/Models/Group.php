@@ -4,6 +4,7 @@ namespace Sprobe\Acl\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Sprobe\Acl\Exceptions\GroupDoesNotExistException;
 
 class Group extends Model
 {
@@ -39,7 +40,7 @@ class Group extends Model
      *
      * @return Sprobe\Acl\Models\Group
      */
-    public function findOrCreate(string $name): Group
+    public static function findOrCreate(string $name): Group
     {
         $group = static::query()->where('name', $name)->first();
 
@@ -48,5 +49,51 @@ class Group extends Model
         }
 
         return $group;
+    }
+
+    /**
+     * Retrieves the Group by name
+     *
+     * @param string $name
+     * @return Sprobe\Acl\Models\Group
+     */
+    public static function findByName(string $name): Group
+    {
+        $group = static::query()->where('name', $name)->first();
+
+        if (! $group instanceof Group) {
+            throw new GroupDoesNotExistException;
+        }
+
+        return $group;
+    }
+
+    /**
+     * Gives the Group Permission to th Resource
+     *
+     * @param string $resource
+     * @param bool $write
+     * @return GroupPermission
+     */
+    public function givePermissionToResource(string $resource, $write = false)
+    {
+        // retrieve the resource
+        $resource = Resource::findBySlug($resource);
+
+        // retrieve the permission type
+        $action = ($write) ? config('permission.write') : config('permission.read');
+        $permission = Permission::whereName($action)->first();
+
+        // create the group permission
+        GroupPermission::firstOrCreate([
+            'group_id' => $this->id,
+            'resource_id' => $resource->id,
+            'permission_id' => $permission->id,
+        ]);
+
+        // reload the model's permissions
+        $this->load('permissions');
+
+        return $this;
     }
 }
