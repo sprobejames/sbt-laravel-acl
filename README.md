@@ -37,7 +37,12 @@ After running composer install, add the following line to your `config/app.php` 
 ```
 
 ## How to Use
-First create a group via artisan command:
+First run the migration to create the database tables needed:
+```
+php artisan migrate
+```
+  
+Create a group via artisan command:
 ```
 php artisan acl:make-group Administrator
 ```
