@@ -20,7 +20,7 @@ trait Permissible
         $action = ($write) ? config('permission.write') : config('permission.read');
 
         // retrieve user groups with permission to given resource
-        $groups = Cache::remember("user.{$this->id}.groups", 60, function () use ($resource, $action) {
+        $groups = Cache::remember("user.{$this->id}.{$resource}", 60, function () use ($resource, $action) {
             return $this->groups()
                         ->whereHas('permissions', function ($query) use ($resource, $action) {
                             $query->whereHas('resource', function ($subQuery) use ($resource) {
