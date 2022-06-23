@@ -3,24 +3,7 @@
 Simple Laravel ACL implementation using groups and permissions.  
 
 ## Installation
-Update your project's `composer.json` file:
-```
-{
-    "require": {
-        ...
-        ...
-        "sprobe/acl": "dev-master"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "ssh://phabricator-vcs@phabricator.sprobe.ph/diffusion/435/sbt-laravel-acl.git"
-        }
-    ]
-}
-```
-  
-In your terminal run the following command:
+You can install this package by running this command:
 ```
 composer require sprobe/acl
 ```
