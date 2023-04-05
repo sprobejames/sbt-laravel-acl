@@ -7,6 +7,9 @@ use Sprobe\Acl\Exceptions\GroupDoesNotExistException;
 
 class GroupUser extends Model
 {
+    /** @var string */
+    protected $table = 'group_user';
+
     /**
      * The attributes that are mass assignable.
      *
